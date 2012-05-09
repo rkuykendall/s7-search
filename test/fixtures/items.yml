@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  tc_id: 1
+  name: MyString
+  body: MyText
+  downloads_count: 1
+  reviews_count: 1
+  permalink: MyString
+  screenshots_count: 1
+  versions_count: 1
+  version_created_at: 2012-05-07 21:19:46
+  ratings_count: 1.5
+  ratings_weighted_count: 1.5
+
+two:
+  user_id: 1
+  tc_id: 1
+  name: MyString
+  body: MyText
+  downloads_count: 1
+  reviews_count: 1
+  permalink: MyString
+  screenshots_count: 1
+  versions_count: 1
+  version_created_at: 2012-05-07 21:19:46
+  ratings_count: 1.5
+  ratings_weighted_count: 1.5

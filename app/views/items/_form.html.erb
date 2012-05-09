@@ -1,0 +1,65 @@
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :tc_id %><br />
+    <%= f.number_field :tc_id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </div>
+  <div class="field">
+    <%= f.label :downloads_count %><br />
+    <%= f.number_field :downloads_count %>
+  </div>
+  <div class="field">
+    <%= f.label :reviews_count %><br />
+    <%= f.number_field :reviews_count %>
+  </div>
+  <div class="field">
+    <%= f.label :permalink %><br />
+    <%= f.text_field :permalink %>
+  </div>
+  <div class="field">
+    <%= f.label :screenshots_count %><br />
+    <%= f.number_field :screenshots_count %>
+  </div>
+  <div class="field">
+    <%= f.label :versions_count %><br />
+    <%= f.number_field :versions_count %>
+  </div>
+  <div class="field">
+    <%= f.label :version_created_at %><br />
+    <%= f.datetime_select :version_created_at %>
+  </div>
+  <div class="field">
+    <%= f.label :ratings_count %><br />
+    <%= f.text_field :ratings_count %>
+  </div>
+  <div class="field">
+    <%= f.label :ratings_weighted_count %><br />
+    <%= f.text_field :ratings_weighted_count %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,6 @@
 S7search::Application.routes.draw do
+  resources :items
+
   Blacklight.add_routes(self)
 
   root :to => "catalog#index"

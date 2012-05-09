@@ -1,0 +1,45 @@
+<h1>Listing items</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Tc</th>
+    <th>Name</th>
+    <th>Body</th>
+    <th>Downloads count</th>
+    <th>Reviews count</th>
+    <th>Permalink</th>
+    <th>Screenshots count</th>
+    <th>Versions count</th>
+    <th>Version created at</th>
+    <th>Ratings count</th>
+    <th>Ratings weighted count</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @items.each do |item| %>
+  <tr>
+    <td><%= item.user_id %></td>
+    <td><%= item.tc_id %></td>
+    <td><%= item.name %></td>
+    <td><%= item.body %></td>
+    <td><%= item.downloads_count %></td>
+    <td><%= item.reviews_count %></td>
+    <td><%= item.permalink %></td>
+    <td><%= item.screenshots_count %></td>
+    <td><%= item.versions_count %></td>
+    <td><%= item.version_created_at %></td>
+    <td><%= item.ratings_count %></td>
+    <td><%= item.ratings_weighted_count %></td>
+    <td><%= link_to 'Show', item %></td>
+    <td><%= link_to 'Edit', edit_item_path(item) %></td>
+    <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_item_path %>

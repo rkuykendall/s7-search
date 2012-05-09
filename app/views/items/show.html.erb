@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @item.user_id %>
+</p>
+
+<p>
+  <b>Tc:</b>
+  <%= @item.tc_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @item.name %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @item.body %>
+</p>
+
+<p>
+  <b>Downloads count:</b>
+  <%= @item.downloads_count %>
+</p>
+
+<p>
+  <b>Reviews count:</b>
+  <%= @item.reviews_count %>
+</p>
+
+<p>
+  <b>Permalink:</b>
+  <%= @item.permalink %>
+</p>
+
+<p>
+  <b>Screenshots count:</b>
+  <%= @item.screenshots_count %>
+</p>
+
+<p>
+  <b>Versions count:</b>
+  <%= @item.versions_count %>
+</p>
+
+<p>
+  <b>Version created at:</b>
+  <%= @item.version_created_at %>
+</p>
+
+<p>
+  <b>Ratings count:</b>
+  <%= @item.ratings_count %>
+</p>
+
+<p>
+  <b>Ratings weighted count:</b>
+  <%= @item.ratings_weighted_count %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
