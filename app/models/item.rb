@@ -1,9 +1,19 @@
 class Item < ActiveRecord::Base
   searchable do
-    text :name, :body, :permalink
-    float :ratings_count, :ratings_weighted_count
-    time :created_at, :updated_at, :version_created_at
-    integer :tc_id, :user_id, :downloads_count, :reviews_count, :screenshots_count, :versions_count
+    text :name, :stored => true
+    text :body, :stored => true
+    text :permalink, :stored => true
+    float :ratings_count, :stored => true
+    float :ratings_weighted_count, :stored => true
+    time :created_at, :stored => true
+    time :updated_at, :stored => true
+    time :version_created_at, :stored => true
+    integer :tc_id, :stored => true
+    integer :user_id, :stored => true
+    integer :downloads_count, :stored => true
+    integer :reviews_count, :stored => true
+    integer :screenshots_count, :stored => true
+    integer :versions_count, :stored => true
 
     # text :title, :body
     # text :comments do
