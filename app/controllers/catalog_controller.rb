@@ -12,12 +12,12 @@ class CatalogController < ApplicationController
     }
 
     # solr field configuration for search results/index views
-    config.index.show_link = 'name_text' #title_display
+    config.index.show_link = 'name_texts' #title_display
     config.index.record_display_type = 'class_name'
 
     # solr field configuration for document/show views
-    config.show.html_title = 'name_text' #title_display
-    config.show.heading = 'name_text' #title_display
+    config.show.html_title = 'name_texts' #title_display
+    config.show.heading = 'name_texts' #title_display
     config.show.display_type = 'class_name'
 
     # solr fields that will be treated as facets by the blacklight application
@@ -64,8 +64,12 @@ config.add_facet_field 'tc_id_i', :label => 'Total Conversion'
 #    config.add_index_field 'published_vern_display', :label => 'Published:'
 #    config.add_index_field 'lc_callnum_display', :label => 'Call number:'
 
-    config.add_index_field 'name_text', :label => 'Name:'
-    config.add_index_field 'body_text', :label => 'Body:'
+    config.add_index_field 'name_texts', :label => 'Name:'
+    config.add_index_field 'ratings_count_fs', :label => 'Rating:'
+    config.add_index_field 'reviews_count_is', :label => 'Reviews:'
+    config.add_index_field 'created_at_ds', :label => 'Created at:'
+    config.add_index_field 'updated_at_ds', :label => 'Updated at:'
+    
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display 
@@ -84,8 +88,15 @@ config.add_facet_field 'tc_id_i', :label => 'Total Conversion'
 #    config.add_show_field 'lc_callnum_display', :label => 'Call number:'
 #    config.add_show_field 'isbn_t', :label => 'ISBN:'
 
-    config.add_show_field 'name_text', :label => 'Name:' 
-    config.add_show_field 'body_text', :label => 'Body:' 
+###    config.add_show_field 'name_text', :label => 'Name:' 
+###    config.add_show_field 'body_text', :label => 'Body:' 
+
+    config.add_show_field 'name_texts', :label => 'Name:'
+    config.add_show_field 'body_texts', :label => 'Body:'
+    config.add_show_field 'ratings_count_fs', :label => 'Rating:'
+    config.add_show_field 'reviews_count_is', :label => 'Reviews:'
+    config.add_show_field 'created_at_ds', :label => 'Created at:'
+    config.add_show_field 'updated_at_ds', :label => 'Updated at:'
 
 
     # "fielded" search configuration. Used by pulldown among other places.
@@ -113,39 +124,39 @@ config.add_facet_field 'tc_id_i', :label => 'Total Conversion'
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields. 
     
-    config.add_search_field('title') do |field|
-      # solr_parameters hash are sent to Solr as ordinary url query params. 
-      field.solr_parameters = { :'spellcheck.dictionary' => 'title' }
-
-      # :solr_local_parameters will be sent using Solr LocalParams
-      # syntax, as eg {! qf=$title_qf }. This is neccesary to use
-      # Solr parameter de-referencing like $title_qf.
-      # See: http://wiki.apache.org/solr/LocalParams
-      field.solr_local_parameters = { 
-        :qf => '$title_qf',
-        :pf => '$title_pf'
-      }
-    end
-    
-    config.add_search_field('author') do |field|
-      field.solr_parameters = { :'spellcheck.dictionary' => 'author' }
-      field.solr_local_parameters = { 
-        :qf => '$author_qf',
-        :pf => '$author_pf'
-      }
-    end
+#   config.add_search_field('title') do |field|
+#     # solr_parameters hash are sent to Solr as ordinary url query params. 
+#      field.solr_parameters = { :'spellcheck.dictionary' => 'title' }
+#
+#     # :solr_local_parameters will be sent using Solr LocalParams
+#     # syntax, as eg {! qf=$title_qf }. This is neccesary to use
+#     # Solr parameter de-referencing like $title_qf.
+#     # See: http://wiki.apache.org/solr/LocalParams
+#     field.solr_local_parameters = { 
+#       :qf => '$title_qf',
+#       :pf => '$title_pf'
+#     }
+#   end
+#   
+#    config.add_search_field('author') do |field|
+#      field.solr_parameters = { :'spellcheck.dictionary' => 'author' }
+#      field.solr_local_parameters = { 
+#        :qf => '$author_qf',
+#        :pf => '$author_pf'
+#      }
+#    end
     
     # Specifying a :qt only to show it's possible, and so our internal automated
     # tests can test it. In this case it's the same as 
     # config[:default_solr_parameters][:qt], so isn't actually neccesary. 
-    config.add_search_field('subject') do |field|
-      field.solr_parameters = { :'spellcheck.dictionary' => 'subject' }
-      field.qt = 'search'
-      field.solr_local_parameters = { 
-        :qf => '$subject_qf',
-        :pf => '$subject_pf'
-      }
-    end
+#    config.add_search_field('subject') do |field|
+#      field.solr_parameters = { :'spellcheck.dictionary' => 'subject' }
+#      field.qt = 'search'
+#      field.solr_local_parameters = { 
+#        :qf => '$subject_qf',
+#        :pf => '$subject_pf'
+#      }
+#    end
 
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and
@@ -156,7 +167,8 @@ config.add_facet_field 'tc_id_i', :label => 'Total Conversion'
 #    config.add_sort_field 'author_sort asc, title_sort asc', :label => 'author'
 #    config.add_sort_field 'title_sort asc, pub_date_sort desc', :label => 'title'
 
-###    config.add_sort_field 'ratings_count_f desc', :label => 'Ratings'
+    config.add_sort_field 'score desc, created_at_ds desc', :label => 'Relevance'
+    config.add_sort_field 'ratings_count_fs desc', :label => 'Ratings'
 
     # If there are more than this many search results, no spelling ("did you 
     # mean") suggestion is offered.
